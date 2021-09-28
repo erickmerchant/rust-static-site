@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Rust Static Site</title>
+  </head>
+  <body>
+    <h1>{{data.title}}</h1>
+    <ul>
+      {%- for tag in data.tags -%}
+      <li>{{tag}}</li>
+      {%- endfor -%}
+    </ul>
+    {{content|markdown|safe}}
+  </body>
+</html>
