@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <script type="module">
+      import init, { render } from "./pkg/grunge.js";
+
+      await init();
+
+      render(window.location.pathname);
+    </script>
+  </body>
+</html>

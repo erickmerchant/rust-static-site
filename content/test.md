@@ -1,5 +1,6 @@
 +++
 title = "My title"
+date = 2021-09-28
 tags = ["tag a", "tag b"]
 +++
 

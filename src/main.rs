@@ -4,7 +4,7 @@ use std::fs;
 
 mod model;
 
-use crate::model::{PageData,PageTemplate};
+use crate::model::{PageData, PageTemplate};
 
 fn main() {
     for entry in glob("content/*.md").unwrap() {

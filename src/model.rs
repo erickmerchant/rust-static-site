@@ -1,9 +1,12 @@
 use askama::Template;
 use serde::Deserialize;
+use toml::value::Datetime;
 
 mod filters {
     use askama::Result;
+    use chrono::NaiveDate;
     use pulldown_cmark::{html, Options, Parser};
+    use toml::value::Datetime;
 
     pub fn markdown(s: &str) -> Result<String> {
         let mut content = String::new();
@@ -14,11 +17,19 @@ mod filters {
 
         Ok(content)
     }
+    pub fn date(d: &Datetime, f: &str) -> Result<String> {
+        let date = NaiveDate::parse_from_str(d.to_string().as_str(), "%Y-%m-%d").unwrap();
+
+        let formatted = date.format(f).to_string();
+
+        Ok(formatted)
+    }
 }
 
 #[derive(Deserialize)]
 pub struct PageData {
     title: String,
+    date: Datetime,
     tags: Vec<String>,
 }
 
