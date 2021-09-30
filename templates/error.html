@@ -1,0 +1,5 @@
+{% extends "layout.html" %} 
+{% block main %}
+<h1>{{ data.title }}</h1>
+<div>{{content|markdown|safe}}</div>
+{% endblock %}

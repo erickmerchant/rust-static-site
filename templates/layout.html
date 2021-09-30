@@ -1,0 +1,41 @@
+{% if is_xhr %} {% block main %}{% endblock %} {% else %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Rust Static Site</title>
+    <script type="module">
+      import init, { render } from "./pkg/grunge.js";
+
+      await init();
+
+      window.onpopstate = () => {
+        render(window.location.pathname || "index");
+      };
+
+      document.addEventListener(
+        "click",
+        (e) => {
+          e.preventDefault();
+
+          const href = e.target.getAttribute("href");
+
+          if (href) {
+            window.history.pushState({}, "", href);
+
+            render(href);
+          }
+        },
+        true
+      );
+    </script>
+  </head>
+  <body>
+    <nav>
+      <a href="/test-1.html">Test 1</a>
+      <a href="/test-2.html">Test 2</a>
+      <a href="/test-3.html">Test 3</a>
+    </nav>
+    <main>{% block main %}{% endblock %}</main>
+  </body>
+</html>
+{% endif %}
