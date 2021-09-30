@@ -9,20 +9,21 @@
       await init();
 
       window.onpopstate = () => {
-        render(window.location.pathname || "index");
+        const href = window.location.pathname;
+        render(href === "/" ? "index" : href);
       };
 
       document.addEventListener(
         "click",
         (e) => {
-          e.preventDefault();
-
           const href = e.target.getAttribute("href");
 
-          if (href) {
+          if (href != null) {
+            e.preventDefault();
+
             window.history.pushState({}, "", href);
 
-            render(href);
+            render(href === "/" ? "index" : href);
           }
         },
         true
