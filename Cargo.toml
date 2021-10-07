@@ -1,5 +1,6 @@
 [package]
-name = "grunge"
+name = "bundle"
+private = true
 version = "0.1.0"
 edition = "2018"
 
@@ -13,31 +14,20 @@ lto = true
 opt-level = 'z'
 
 [dependencies]
-askama = "0.10"
-askama_escape = { version = "0.10" }
+askama = { version = "0.10", default-features = false }
 chrono = "0.4.19"
 console_error_panic_hook = "0.1.6"
 glob = "0.3.0"
-js-sys = "0.3.55"
-pulldown-cmark = "0.8"
-serde = { version = "1.0", features = ["derive"] }
-serde_derive = "^1.0.59"
-toml = "0.5"
-wasm-bindgen = { version = "0.2.78", features = ["serde-serialize"]  }
-wasm-bindgen-futures = "0.4.28"
+pulldown-cmark = { version = "0.8", default-features = false }
+serde = { version = "1.0", default-features = false, features = ["derive"] }
+toml = { version = "0.5", default-features = false }
+wasm-bindgen = { version = "0.2.78" }
 wee_alloc = "0.4.5"
+
+# askama_escape = { version = "0.10", default-features = false }
+# js-sys = "0.3.55"
+# wasm-bindgen-futures = "0.4.28"
 
 [dependencies.web-sys]
 version = "0.3.4"
-features = [
-  'Document',
-  'Element',
-  'Headers',
-  'HtmlElement',
-  'Node',
-  'Request',
-  'RequestInit',
-  'RequestMode',
-  'Response',
-  'Window',
-]
+features = []

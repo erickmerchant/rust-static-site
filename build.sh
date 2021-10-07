@@ -1,1 +1,1 @@
-cargo build --release; wasm-pack build --out-dir dist/pkg --target=web;
+cargo run; wasm-pack build --out-dir dist/pkg --target=web;

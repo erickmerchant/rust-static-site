@@ -31,6 +31,7 @@ pub struct PageData {
     title: String,
     date: Datetime,
     tags: Vec<String>,
+    image: String,
 }
 
 #[derive(Template, Deserialize)]
@@ -72,6 +73,7 @@ impl Default for PageData {
                 Ok(date) => date,
                 _ => process::abort(),
             },
+            image: String::new(),
             tags: vec![],
         }
     }

@@ -8,7 +8,7 @@ mod model;
 use crate::model::{unfound_page, PageData, PageTemplate};
 
 fn main() {
-    // fs::create_dir_all("dist").unwrap();
+    fs::create_dir_all("dist").unwrap();
     fs::create_dir_all("dist/content").unwrap_or_default();
 
     for entry in glob("content/*.md").unwrap() {
