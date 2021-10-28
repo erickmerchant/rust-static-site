@@ -5,7 +5,7 @@ use std::path::Path;
 
 mod model;
 
-use crate::model::{unfound_page, PageData, PageTemplate};
+use crate::model::{ErrorTemplate, PostData, PostTemplate};
 
 fn main() {
     fs::create_dir_all("dist").unwrap();
@@ -17,9 +17,9 @@ fn main() {
 
             let file_contents = fs::read_to_string(&path).unwrap();
             let file_parts: Vec<&str> = file_contents.splitn(3, "+++").collect();
-            let data: PageData = toml::from_str(file_parts[1]).unwrap();
+            let data: PostData = toml::from_str(file_parts[1]).unwrap();
             let content: String = file_parts[2].to_string();
-            let template = PageTemplate {
+            let template = PostTemplate {
                 data: data,
                 content: content,
                 is_xhr: false,
@@ -30,7 +30,7 @@ fn main() {
         }
     }
 
-    let mut template = unfound_page();
+    let mut template = ErrorTemplate::error_404();
 
     template.is_xhr = false;
 

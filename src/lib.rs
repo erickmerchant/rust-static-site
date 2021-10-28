@@ -4,7 +4,7 @@ extern crate wee_alloc;
 
 mod model;
 
-use crate::model::{unfound_page, ErrorData, ErrorTemplate, PageData, PageTemplate};
+use crate::model::{ErrorData, ErrorTemplate, PostData, PostTemplate};
 use askama::Template;
 use wasm_bindgen::prelude::*;
 
@@ -23,7 +23,7 @@ pub fn render(status: u16, text: String) -> Result<JsValue, JsValue> {
     let html = match status {
         200 => {
             let file_parts: Vec<&str> = text.splitn(3, "+++").collect();
-            let data: PageData = toml::from_str(match file_parts.get(1) {
+            let data: PostData = toml::from_str(match file_parts.get(1) {
                 Some(s) => s,
                 _ => "",
             })
@@ -33,7 +33,7 @@ pub fn render(status: u16, text: String) -> Result<JsValue, JsValue> {
                 _ => "",
             }
             .to_string();
-            let template = PageTemplate {
+            let template = PostTemplate {
                 data: data,
                 content: content,
                 is_xhr: true,
@@ -41,7 +41,7 @@ pub fn render(status: u16, text: String) -> Result<JsValue, JsValue> {
             template.render()
         }
         404 => {
-            let mut template = unfound_page();
+            let mut template = ErrorTemplate::error_404();
 
             template.is_xhr = true;
 

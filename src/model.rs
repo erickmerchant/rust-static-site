@@ -27,7 +27,7 @@ mod filters {
 }
 
 #[derive(Deserialize)]
-pub struct PageData {
+pub struct PostData {
     title: String,
     date: Datetime,
     tags: Vec<String>,
@@ -36,8 +36,8 @@ pub struct PageData {
 
 #[derive(Template, Deserialize)]
 #[template(path = "page.html")]
-pub struct PageTemplate {
-    pub data: PageData,
+pub struct PostTemplate {
+    pub data: PostData,
     pub content: String,
     pub is_xhr: bool,
 }
@@ -55,19 +55,21 @@ pub struct ErrorTemplate {
     pub is_xhr: bool,
 }
 
-pub fn unfound_page() -> ErrorTemplate {
-    ErrorTemplate {
-        data: ErrorData {
-            title: String::from("Page not found"),
-        },
-        content: String::from("Try the [home page](/)"),
-        is_xhr: true,
+impl ErrorTemplate {
+    pub fn error_404() -> ErrorTemplate {
+        ErrorTemplate {
+            data: ErrorData {
+                title: String::from("Page not found"),
+            },
+            content: String::from("Try the [home page](/)"),
+            is_xhr: true,
+        }
     }
 }
 
-impl Default for PageData {
-    fn default() -> PageData {
-        PageData {
+impl Default for PostData {
+    fn default() -> PostData {
+        PostData {
             title: String::new(),
             date: match Datetime::from_str("0000-00-00") {
                 Ok(date) => date,
